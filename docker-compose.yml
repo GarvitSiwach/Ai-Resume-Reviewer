@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: resume-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: resumedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: resume-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/resumedb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgrespassword
+      AI_SERVICE_URL: http://ai-service:8000
+    depends_on:
+      - postgres
+      - ai-service
+
+  ai-service:
+    build: ./ai-service
+    container_name: resume-ai-service
+    ports:
+      - "8000:8000"
+    environment:
+      # Add your API keys here or in a .env file
+      # OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GEMINI_API_KEY: AIzaSyCVE0-qPzKednD_EHk0lTEZcf7JLQ7H66A
+
+  frontend:
+    build: ./frontend
+    container_name: resume-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
