@@ -33,7 +33,7 @@ services:
     environment:
       # Add your API keys here or in a .env file
       # OPENAI_API_KEY: ${OPENAI_API_KEY}
-      GEMINI_API_KEY: AIzaSyBJ4TS2mmWv_O8yYHus9dxNUYz_LlaydTU
+      
     volumes:
       - ./ai-service:/app
 
