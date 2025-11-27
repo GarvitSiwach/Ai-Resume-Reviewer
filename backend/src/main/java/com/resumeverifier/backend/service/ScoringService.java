@@ -22,11 +22,11 @@ public class ScoringService {
         educationCredibility = educationCredibility != null ? educationCredibility : 0.0;
         aiConfidenceScore = aiConfidenceScore != null ? aiConfidenceScore : 0.0;
 
-        return (0.30 * skillConsistency) +
+        return ((0.30 * skillConsistency) +
                 (0.20 * projectAuthenticity) +
                 (0.20 * timelineValidity) +
                 (0.15 * educationCredibility) +
-                (0.15 * aiConfidenceScore);
+                (0.15 * aiConfidenceScore)) * 100;
     }
 
     private Double getDouble(Map<String, Object> map, String key) {

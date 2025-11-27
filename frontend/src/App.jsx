@@ -4,14 +4,14 @@ import Upload from './Upload';
 import Report from './Report';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Upload />} />
-        <Route path="/report/:id" element={<Report />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Upload />} />
+                <Route path="/report/:id" element={<Report />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
